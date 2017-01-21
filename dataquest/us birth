@@ -1,0 +1,83 @@
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+"""
+Created on Sat Jan 14 09:28:58 2017
+
+@author: martin
+"""
+
+def read_csv(file):
+    string_list = open(file,"r").read().split("\n")[1:]
+    final_list=[]
+    for i in string_list:
+        string_fields=i.split(",")
+        int_fields = []
+        for a in string_fields:    
+            int_fields.append(int(a))
+        final_list.append(int_fields)
+    return final_list
+        
+cdc_list = read_csv("US_births_1994-2003_CDC_NCHS.csv")
+print(cdc_list[:10])
+
+
+def read_csv(filename):
+    string_data = open(filename).read()
+    string_list = string_data.split("\n")[1:]
+    final_list = []
+    
+    for row in string_list:
+        string_fields = row.split(",")
+        int_fields = []
+        for value in string_fields:
+            int_fields.append(int(value))
+        final_list.append(int_fields)
+    return final_list
+        
+cdc_list = read_csv("US_births_1994-2003_CDC_NCHS.csv")
+
+
+
+
+string_list = open("US_births_1994-2003_CDC_NCHS.csv","r").read().split("\n")[1:]
+    #final_list=[]
+int_fields = []
+for i in string_list:
+    string_fields=i.split(",")
+    for a in string_fields:    
+            int_fields.append(int(a))
+print(int_fields[:10])
+
+def month_births(input_list):
+    births_per_month = {}
+    for item in input_list:
+        if item[1] in births_per_month:
+            births_per_month[item[1]] +=item[4]
+        else:
+            births_per_month[item[1]] = item[4]
+    return births_per_month
+cdc_month_births=month_births(cdc_list)
+print(cdc_month_births)
+
+
+def dow_births(input_list2):
+    births_per_week = {}
+    for item in input_list2:
+        if item[3] in births_per_week:
+            births_per_week[item[3]] +=item[4]
+        else:
+            births_per_week[item[3]] = item[4]
+    return births_per_week
+cdc_day_births=dow_births(cdc_list)
+print(cdc_day_births)
+
+
+
+def calc_counts(data,column):
+    births_per_time = {}
+    for item in data:
+        if item[column] in births_per_time:
+            births_per_time[item[column]] +=item[4]
+        else:
+            births_per_time[item[column]] = item[4]
+    return births_per_time
